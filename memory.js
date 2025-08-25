@@ -50,20 +50,24 @@ const iconsArray = [
 ]
 
 let flippedCard = []
+let matchedPairs = 0
+const gameBoard = document.getElementById("gameBoard")
+const reset = document.getElementById("reset").addEventListener('click', newGame)
+let trackMatch = document.getElementById("matchFound")
 
 shuffleCards();
-const gameBoard = document.getElementById("gameBoard")
 displayCards();
 
-let matchedPairs = 0
-
-const reset = document.getElementById("reset").addEventListener('click', newGame)
+trackMatch.innerHTML = "Get ready!"
+trackMatch.style.fontSize = "24px"
+trackMatch.style.fontWeight = "bold"
 
 function newGame() {
-
     while (gameBoard.firstChild) {
         gameBoard.removeChild(gameBoard.firstChild)
     }
+    trackMatch.innerHTML = "Get ready!"
+    gameBoard.removeAttribute("style")
     flippedCard = [];
     matchedPairs = 0;
     shuffleCards();
@@ -82,14 +86,13 @@ function displayCards() {
         const card = document.createElement("div")
         card.setAttribute("id", index)
         card.classList.add('cardback')
-        card.classList.add('active')
         card.addEventListener('click', flipCard)
         gameBoard.append(card)
     })
-    console.log(iconsArray)
 }
 
 function flipCard() {
+    trackMatch.innerHTML = `Cards Flipped : ${matchedPairs}`
     if (flippedCard.length < 2) {
         const cardId = this.getAttribute('id')
         flippedCard.push(this)
@@ -99,6 +102,7 @@ function flipCard() {
     if (flippedCard.length == 2) {
         setTimeout(checkMatch, 1000)
     }
+
 }
 
 function checkMatch() {
@@ -109,6 +113,7 @@ function checkMatch() {
         flippedCard[0].style.pointerEvents = "none"
         flippedCard[1].style.pointerEvents = "none"
         matchedPairs++;
+        trackMatch.innerHTML = `Cards Flipped : ${matchedPairs}`
         checkGameOver()
     }
     else {
@@ -116,7 +121,6 @@ function checkMatch() {
         flippedCard[0].classList.add("cardback")
         flippedCard[1].innerHTML = ""
         flippedCard[1].classList.add("cardback")
-
     }
     flippedCard = []
 }
@@ -126,18 +130,13 @@ function checkGameOver() {
         while (gameBoard.firstChild) {
             gameBoard.removeChild(gameBoard.firstChild)
         }
+        trackMatch.innerHTML = "Well done! You matched all the pairs!"
         gameBoard.innerHTML = "You Won"
-        // gameBoard.style.display = "flex"
-        // gameBoard.style.top = "50%";
-        // gameBoard.style.left = "50%";
-        // gameBoard.style.transform = "translate(-50%, -50%)";
-        // gameBoard.style.background = "linear-gradient(135deg, #A8E6CF, #DCEDC1, #FFD3B6)";
-        // gameBoard.style.color = "#2C2C2C";
-        // gameBoard.style.fontSize = "2rem";
-        // gameBoard.style.fontWeight = "bold";
-        // gameBoard.style.padding = "20px 40px";
-        // gameBoard.style.borderRadius = "15px";
-        // gameBoard.style.boxShadow = "0 4px 20px rgba(0,0,0,0.3)";
-        // gameBoard.style.textAlign = "center";
+        gameBoard.style.display = "flex"; gameBoard.style.position = "fixed"; gameBoard.style.top = "50%";
+        gameBoard.style.left = "50%";
+        gameBoard.style.transform = "translate(-50%, -50%)";
+        gameBoard.style.background = "linear-gradient(135deg, #A8E6CF, #DCEDC1, #FFD3B6)";
+        gameBoard.style.color = "#2C2C2C"; gameBoard.style.fontSize = "2rem"; gameBoard.style.fontWeight = "bold"; gameBoard.style.padding = "20px 40px"; gameBoard.style.borderRadius = "15px"; gameBoard.style.boxShadow = "0 4px 20px rgba(0,0,0,0.3)";
+        gameBoard.style.textAlign = "center";
     }
 }
