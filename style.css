@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: linear-gradient(135deg, #FDEBEB, #D6EAF8, #E8F6F3);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: transparent;
+    color: #1E3A8A;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.game-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.reset-button {
+    border: 1px solid #1e3a8a;
+    background: transparent;
+    color: #1E3A8A;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.reset-button:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.game {
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    grid-row-gap: 2em;
+    justify-content: center;
+    margin: 25px auto
+}
+
+#gameBoard div {
+    height: 150px;
+    width: 80px;
+    border-radius: 10px;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    color: #1E3A8A;
+    /* background-color: #e5e5f7; */
+
+}
+
+.cardback {
+    background-color: #2a5298;
+    /* Base color */
+    background-image:
+        linear-gradient(45deg, #1e3c72 25%, transparent 25%),
+        linear-gradient(-45deg, #1e3c72 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #1e3c72 75%),
+        linear-gradient(-45deg, transparent 75%, #1e3c72 75%);
+    background-size: 20px 20px;
+    /* Size of squares */
+}
